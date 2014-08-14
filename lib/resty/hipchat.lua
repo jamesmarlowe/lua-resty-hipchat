@@ -23,7 +23,7 @@ local valid_message_format_values = {
 
 
 local valid_notify_values = {
-    0 = 0, 1 = 1
+    [0] = 0, [1] = 1
 }
 
 
