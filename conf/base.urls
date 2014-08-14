@@ -1,0 +1,24 @@
+
+        location = /lua-resty-hipchat/test/ {
+            internal;
+            
+            content_by_lua '
+                local hipchat = require "hipchat"
+                
+                local params = ngx.req.get_query_args()
+                
+                if not params.hipchat_token then
+                    ngx.say("no hipchat token")
+                    ngx.exit(1)
+                end
+                
+                local hc, err = hipchat:new(params.hipchat_token)
+                
+                if err then ngx.say(err) ngx.exit(1) end
+                
+                local ok, err = hc:room_message("AdTrade", "AdTrade", "test")
+                
+                if err then ngx.say(err) ngx.exit(1) end
+
+            ';
+        }
